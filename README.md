@@ -1,10 +1,10 @@
 # Komodo Proxy 
 
 ## What is it? 
-The traefik server proxies requests to various komodo subdomains (eg. 'api.komodo.edu, relay.komodo.edu, etc) to their corresponding containers. We run traefik in `docker` mode.
+The traefik proxy server routes requests for various subdomains (eg. 'api.komodo.edu', 'relay.komodo.edu', etc) to their corresponding docker containers.
 
 ## Configuring the proxy server
-You will need to configure the proxy server with your own certificates. You will need to set the path to these in both the `traefik.toml` configuration file, and `docker-compose.yml`. 
+You will need to configure the proxy server with your own certificates. You will need to set the correct paths both the `traefik.toml` configuration file, and `docker-compose.yml`. 
 
 ### `docker-compose.yml`
 ```
