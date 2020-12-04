@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:1.7
+    command: --docker # --api
+    ports:
+      - "80:80"
+      - "443:443"
+      # - "8080:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/traefik.toml
+      # map host cert directory to container
+      - < PATH TO CERT ON HOST > :< PATH TO CERT IN TRAEFIK CONTAINER >
+      - < PATH TO KEY ON HOST >  :< PATH TO KEY  IN TRAEFIK CONTAINER >
+    networks:
+      - proxy
+    restart: always
+    environment:
+      - GODEBUG=tls13=1
+networks: 
+  proxy:
+    external: true

@@ -1,0 +1,46 @@
+################################################################
+# Global configuration
+################################################################
+
+# Enable debug mode
+# Default: false
+# debug = true
+
+# Log level
+# Default: "ERROR"
+# logLevel = "DEBUG"
+
+defaultEntryPoints = ["http", "https"]
+
+################################################################
+# Entrypoints configuration
+################################################################
+
+# Entrypoints definition
+#
+# Optional
+# Default:
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+    minVersion = "VersionTLS12"
+      [[entryPoints.https.tls.certificates]]
+        certFile = "< PATH TO CERT IN TRAEFIK CONTAINER >"
+        keyFile =  "< PATH TO KEY  IN TRAEFIK CONTAINER >"
+
+
+################################################################
+# Docker configuration backend
+################################################################
+
+# Enable Docker configuration backend
+[docker]
+domain = "localhost"
+
+# Expose containers by default in traefik
+exposedByDefault = false
